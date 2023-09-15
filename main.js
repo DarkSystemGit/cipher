@@ -59,13 +59,13 @@ function encrypt(str, key) {
 function parseArgs(keys) {
     var args = process.argv.slice(2)
     var res = { flags: [] }
-    
+
     args.forEach((elm, index) => {
-        console.log(keys, index, elm.replaceAll('-'))
-        if(keys.flags.includes(elm.replaceAll('-'))){
-            res.flags.push[elm]
-        }else if(keys.options.includes(elm.replaceAll('-'))){
-            res[elm]=args[index+1]
+        console.log(keys, index, elm.replaceAll('-',''))
+        if (keys.flags.includes(elm.replaceAll('-', ''))) {
+            res.flags.push[elm.replaceAll('-', '')]
+        } else if (keys.options.includes(elm.replaceAll('-', ''))) {
+            res[elm.replaceAll('-', '')] = args[index + 1]
         }
     });
     console.log(res)
@@ -75,20 +75,20 @@ function decrypt(str, key) {
     return encrypt(Array.from(str).reverse().join(''), key)
 }
 function sconsole() {
-    var args = parseArgs({flags:['e','d'],options:['key','plaintext','ciphertext']})
-    try{
+    var args = parseArgs({ flags: ['e', 'd'], options: ['key', 'plaintext', 'ciphertext'] })
+    try {
         if (args.flags.includes('e')) {
             var res = encrypt(args.plaintext, parseInt(args.key) - 1)
             res[1]++
             if (res == args[0]) {
                 res = encrypt(args.plaintext, parseInt(args.key))
             }
-        }else if (args.flags.includes('d')) {
+        } else if (args.flags.includes('d')) {
             var res = decrypt(args.ciphertext, parseInt(args.key) - 1)
-            
+
         }
-    }catch{console.log(`Error, wrong pramaters\nUsage: ${process.args[0]} ${process.args[1]} <mode> text keys`)}
-   
+    } catch { console.log(`Error, wrong pramaters\nUsage: ${process.args[0]} ${process.args[1]} <mode> text keys`) }
+
 
 
     //console.log(res)
