@@ -9,12 +9,12 @@ function isOdd(i) {
 }
 function encrypt(str, key) {
     var cipher = (str, key) => {
-        if (key < 0) return;
+        if (key < 0){ console.log('Error: Key must be bigger than 0');process.exit(1)}
         //str= '*'+str
         //console.log(str)
         //console.log(chiptertext[0])
         var strCount = (Array.from([str.length])[0] / 2)
-        var maxRuns = 1000
+        var maxRuns = 9999999
         for (var counter = 0; counter <= key; counter++) {
             if (counter == maxRuns) break
 
@@ -72,9 +72,9 @@ function parseArgs(keys) {
     return res
 }
 function decrypt(str, key) {
- var res =encrypt('#'+Array.from(str).reverse().join(''), key)
-res[0]=Array.from()res[0].replace('#',"").reverse().join(''), 
- return res
+    var res = encrypt('#' + Array.from(str).reverse().join(''), key)
+    res[0] = Array.from(res[0].replace('#', "")).reverse().join('')
+    return res
 }
 function sconsole() {
     var args = parseArgs({ flags: ['e', 'd'], options: ['key', 'plaintext', 'ciphertext'] })
@@ -87,13 +87,15 @@ function sconsole() {
             }
         } else if (args.flags.includes('d')) {
             var res = decrypt(args.ciphertext, parseInt(args.key) - 1)
+            res[1]++
 
         }
-    } catch { console.log(`Error, wrong pramaters\nUsage: ${process.args[0]} ${process.args[1]} <mode> text keys`) }
+        console.log(`Result: ${res[0]}, Key: ${res[1]}`)
+    } catch { console.log(`Error, wrong pramaters\nUsage: ${process.argv[0]} ${process.argv[1]} <mode> text key`) }
 
 
 
     //console.log(res)
-    console.log(`Result: ${res[0]}, Key: ${res[1]}`)
+   
 }
 sconsole()
