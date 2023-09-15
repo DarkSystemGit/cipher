@@ -61,14 +61,14 @@ function parseArgs(keys) {
     var res = { flags: [] }
 
     args.forEach((elm, index) => {
-        console.log(keys, index, elm.replaceAll('-',''))
+        //console.log(keys, index, keys.flags.includes(elm.replaceAll('-', '')))
         if (keys.flags.includes(elm.replaceAll('-', ''))) {
-            res.flags.push[elm.replaceAll('-', '')]
+            res.flags.push(elm.replaceAll('-', ''))
         } else if (keys.options.includes(elm.replaceAll('-', ''))) {
             res[elm.replaceAll('-', '')] = args[index + 1]
         }
     });
-    console.log(res)
+    //console.log(res)
     return res
 }
 function decrypt(str, key) {
