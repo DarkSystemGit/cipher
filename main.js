@@ -72,7 +72,9 @@ function parseArgs(keys) {
     return res
 }
 function decrypt(str, key) {
-    return encrypt(Array.from(str).reverse().join(''), key)
+ var res =encrypt('#'+Array.from(str).reverse().join(''), key)
+res[0]=Array.from()res[0].replace('#',"").reverse().join(''), 
+ return res
 }
 function sconsole() {
     var args = parseArgs({ flags: ['e', 'd'], options: ['key', 'plaintext', 'ciphertext'] })
